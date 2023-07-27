@@ -17,6 +17,9 @@ pipeline {
         }
          stage("Tomcat-dev"){
             //  install SSH Agent plugin 
+             when {
+                    branch "develop"
+                     }
             steps {
                 sshagent(['tomcat-dev']) {
                     // Copy war file to tomcat dev server
