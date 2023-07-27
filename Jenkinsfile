@@ -6,14 +6,15 @@ pipeline {
             steps {
                 echo 'Hello World-Jenkins Pipeline'
             }
-            when {
+        }
+        stage("Maven Build"){
+                when {
                     branch "develop"
-                 }
-            stage("Maven Build"){
-            steps {
+                     }
+                steps {
                 sh 'mvn clean package'
-                    }
-                                 }
+                     }
+        }
          stage("Tomcat-dev"){
             //  install SSH Agent plugin 
             steps {
@@ -23,8 +24,7 @@ pipeline {
                     sh "ssh ec2-user@172.31.94.185 /opt/tomcat9/bin/shutdown.sh"
                     sh "ssh ec2-user@172.31.94.185 /opt/tomcat9/bin/startup.sh"
                     }
-                    }
+                 }
             }
         }
     }
-}
