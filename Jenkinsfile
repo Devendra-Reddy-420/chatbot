@@ -27,7 +27,7 @@ pipeline {
                  }
             }
         // to Build the changes in Test environment
-        stage("Maven Build"){
+        stage("Maven Build1"){
                 when {
                     branch "test"
                      }
@@ -35,7 +35,7 @@ pipeline {
                 sh 'mvn clean package'
                      }
         }
-         stage("Tomcat-dev"){
+         stage("Tomcat-test"){
             //  install SSH Agent plugin 
             steps {
                 sshagent(['tomcat-test']) {
@@ -47,7 +47,7 @@ pipeline {
                  }
             }
         // to Build the changes in Prod environment
-        stage("Maven Build"){
+        stage("Maven Build2"){
                 when {
                     branch "main"
                      }
