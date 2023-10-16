@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     stages {
         stage('Hello') {
             steps {
@@ -8,18 +7,12 @@ pipeline {
             }
         }
         stage("Maven Build"){
-                when {
-                    branch "main"
-                     }
                 steps {
                 sh 'mvn clean package'
                      }
         }
          stage("Tomcat-dev"){
-            //  install SSH Agent plugin 
-             when {
-                    branch "main"
-                     }
+            //  install SSH Agent plugin
             steps {
                 sshagent(['tomcat-dev']) {
                     // Copy war file to tomcat dev server
@@ -29,14 +22,5 @@ pipeline {
                     }
                  }
             }
-        // to Build the sample changes in Prod environment
-        // stage("prod-deploy"){
-        //             when {
-        //                 branch "main"
-        //                 }
-        //                    steps {
-        //                         echo "Test Deploy"
-        //                     }
-        //        }
-            }
-        }
+      }
+}
